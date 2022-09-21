@@ -2,6 +2,7 @@
     background-color: rgb(51 65 85);
 }
 
+
 .text-light{
     color: rgb(241 245 249);
 }
@@ -12,4 +13,75 @@
     align-items: center;
 }
 
+#nadpis{
+    font-size: 3vw;
+    text-align: center;
+}
+
+#map{
+    height:40vw; 
+    width: 80vw;
+}
+
+.toilet_submit{
+    background-color: rgb(241 245 249);
+    color: rgb(51 65 85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 42vw;
+    margin-top: 10vw;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,10,0); /* Fallback color */
+    background-color: rgba(159, 159, 159, 0.464); /* Black w/ opacity */
+  }
+
+input[type=text], input[type=submit]{
+    border: 1px solid rgb(51 65 85);
+    border-radius: 6px;
+    background-color: rgb(241 245 249);
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+input[type=submit]{
+    font-size: medium;
+}
+
+input[type=submit]:hover{
+    background-color: #4CAF50;
+    color: rgb(241 245 249);
+    cursor: pointer;
+}
+
+@media  screen and (max-width: 500px) {
+    #content{
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #nadpis{
+        font-size: 10vw;
+    }
+
+    #map{
+        height: 100vw;
+        width: 70vw;
+    }
+}
 

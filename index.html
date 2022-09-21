@@ -1,37 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
     <title>Záchody</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="utf-8">
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="https://api.mapy.cz/loader.js"></script>
-    <script type="text/javascript">Loader.load()</script>
-
-</head>
-<body  class="bg-dark text-light" style="font-family:Arial, sans-serif;">
+    <script src="script.js"></script>
+  </head>
     
-    <div id="content">
-
-        <h1 class="m-8  text-slate-100" style="font-size: 3vw; text-align: center;">Záchody v okolí</h1>
-
-        <div id="mapa" style="height:30vw; width: 50vw;"></div>
-
-
-    </div>
+    <body  class="bg-dark text-light" style="font-family:Arial, sans-serif;">
     
-
+        <div id="content">
     
-</body>
+            <h1 id="nadpis">Záchody v okolí</h1>
 
-<script type="text/javascript">
-    var center = SMap.Coords.fromWGS84(14.41790, 50.12655);
-    var m = new SMap(JAK.gel("mapa"), center, 13);
-    m.addDefaultLayer(SMap.DEF_BASE).enable(); 
-    m.addDefaultControls();  
-    var sync = new SMap.Control.Sync({bottomSpace:50});
-    m.addControl(sync);   	      
-</script>
+            <div class="modal" id="modal">
+                <div id="submit_toilet" class="toilet_submit">
+                    <form action="">
+                        <label for="tprice"><b>Cena záchodu</b></label>
+                        <br>
+                        <input type="text">
+                        <br>
+                        <label for="tcode"><b>Kód od záchodu</b></label>
+                        <br>
+                        <input type="text">
+                        <br>
+                        <input type="submit" value="Odeslat">
+                    </form>
+                </div>
+            </div>
 
+            
+            <div id="map"></div>
+    
+        </div>
+        
+    <script>
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }     
+        }
+
+        var x = document.getElementById("modal");
+
+        let map ;
+
+        function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 50.0833, lng: 14.4667 },
+            zoom: 15,
+        });
+        map.addListener("click", (e) => {
+            placeMarkerAndPanTo(e.latLng, map);
+        });
+        
+
+        function placeMarkerAndPanTo(latLng, map) {
+            x.style.display = "block";
+            new google.maps.Marker({
+                position: latLng,
+                map: map,
+            });
+            map.panTo(latLng);
+        }
+
+        const locationButton = document.createElement("button");
+
+        locationButton.textContent = "Vaše poloha";
+        locationButton.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(locationButton);
+        locationButton.addEventListener("click", () => {
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    
+                };
+
+                
+                
+                map.setCenter(pos);
+                },
+                () => {
+                handleLocationError(true, infoWindow, map.getCenter());
+                }
+            );
+            } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+            }
+        });
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(
+            browserHasGeolocation
+            ? "Error: The Geolocation service failed."
+            : "Error: Your browser doesn't support geolocation."
+        );
+        infoWindow.open(map);
+        }
+
+
+        
+
+        window.initMap = initMap;
+
+
+        
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNpnzFzT8fxxgr_eOQbuIWj4D40pvgqKk&region=CZ&language=cs&callback=initMap"
+    async defer></script>
+  </body>
 </html>
