@@ -26,15 +26,15 @@
 .toilet_submit{
     background-color: rgb(241 245 249);
     color: rgb(51 65 85);
+    font-size:large;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: fit-content;
     height: fit-content;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
-    margin-left: 42vw;
-    margin-top: 10vw;
+    margin: auto;
 }
 
 .modal {
@@ -55,13 +55,12 @@ input[type=text], input[type=submit]{
     border: 1px solid rgb(51 65 85);
     border-radius: 6px;
     background-color: rgb(241 245 249);
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: medium;
+    padding: 5px;
 }
 
-input[type=submit]{
-    font-size: medium;
-}
 
 input[type=submit]:hover{
     background-color: #4CAF50;
@@ -80,8 +79,8 @@ input[type=submit]:hover{
     }
 
     #map{
-        height: 100vw;
-        width: 70vw;
+        height: 180vw;
+        width: 90vw;
     }
 }
 
